@@ -37,6 +37,15 @@ class rdiff-backup::server {
     }
   }
 
+  tidy {"/var/log/rdiff-backup/":
+    matches => "*.log",
+    recurse => true,
+    age     => $rdiff_backup_log_age? {
+      "" => '15d',
+      default => $rdiff_backup_log_age,
+    }
+  }
+
   if ($rdiff_backup_backupdir) {
     $backupdir = $rdiff_backup_backupdir
   } else {
