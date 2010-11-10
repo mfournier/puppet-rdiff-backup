@@ -18,6 +18,7 @@ node 'central-backup-server' {
   $rdiff_backup_enable_mail = 1
   $rdiff_backup_mail_from = "backupserver@domain.com"
   $rdiff_backup_mail_to = "backupmanager@domain.com"
+  $rdiff_backup_log_age = "2d"
 
   # copy and modify one of these classes to install another version
   rdiff-backup::server::install { ["0.13.4","1.1.15","1.1.5"]: 
