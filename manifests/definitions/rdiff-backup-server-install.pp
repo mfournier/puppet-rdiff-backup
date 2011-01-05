@@ -1,6 +1,8 @@
 define rdiff-backup::server::install ($ensure=present) {
   $version = "rdiff-backup-${name}"
-  $url = "http://mirror.lihnidos.org/GNU/savannah/rdiff-backup/${version}.tar.gz"
+  $url = "http://ftp.igh.cnrs.fr/pub/nongnu/rdiff-backup/${version}.tar.gz"
+
+
 
   case $ensure {
     present: {
