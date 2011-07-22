@@ -19,7 +19,7 @@ from email import Header
 
 _REGEX = re.compile(r""".*ElapsedTime .*? \((?P<time>.*?)\).*Errors\s(?P<errors>\d+)""", re.DOTALL)
 _RB_PATH = "/opt/rdiff-backup/rdiff-backup-%s/bin/rdiff-backup"
-_PYTHONPATH = "PYTHONPATH=/opt/rdiff-backup/rdiff-backup-%s/lib/python2.5/site-packages "
+_PYTHONPATH = "PYTHONPATH=/opt/rdiff-backup/rdiff-backup-%s/lib/python<%=python_version%>/site-packages "
 
 class Email:
   def __init__ (self, subject, msg, mailFrom, mailTo, smtpSrv = 'localhost'):
