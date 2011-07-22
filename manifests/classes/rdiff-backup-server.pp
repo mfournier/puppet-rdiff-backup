@@ -29,11 +29,17 @@ class rdiff-backup::server {
       package {
         "librsync-dev":  ensure => present, alias => "librsync-devel";
       }
+      case $lsbdistcodename {
+        'squeeze': { $python_version = '2.6' }
+        'lenny':   { $python_version = '2.5' }
+        default:   { fail "No python version defined for $lsbdistcodename" }
+      }
     }
     RedHat: {
       package {
         "librsync-devel": ensure => present, alias => "librsync-devel";
       }
+      $python_version = '2.5'
     }
   }
 
@@ -68,11 +74,12 @@ class rdiff-backup::server {
   }
 
   file {"/usr/local/sbin/multiprocessing-rdiff-backup.py":
-    ensure => present,
-    owner  => root,
-    group  => root,
-    mode   => 755,
     source => "puppet:///rdiff-backup/usr/local/sbin/multiprocessing-rdiff-backup.py",
+    ensure  => present,
+    owner   => root,
+    group   => root,
+    mode    => 755,
+    content => template("rdiff-backup/multithreaded-rdiff-backup.py.erb"),
   }
   
   # cron to start multi-thread script
